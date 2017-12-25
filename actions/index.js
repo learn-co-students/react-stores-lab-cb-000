@@ -1,4 +1,15 @@
 // Your implementation here.
 // Hint: We need two actions!
 
-export default {}
+
+function increment(ev){
+
+}
+
+function decrement(ev){
+
+}
+module.exports = {
+  increment,
+  decrement
+}
