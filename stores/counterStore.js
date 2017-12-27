@@ -1,33 +1,27 @@
 import Store from './Store'
-import actions from '../actions';
+
 class CounterStore extends Store {
   // Your implementation here.
   // Hint: extend the Store class!
 
  constructor(){
-   super();
-   this.state = {
-     counter: 0
-   }
+   super(0);
+
  }
 
-
-  setState(state){
-
-  }
-
   increment(){
+
+    const updatedState = this.getState() + 1;
+    this.setState(updatedState);
 
   }
 
   decrement(){
+    const updatedState = this.getState() - 1;
+    this.setState(updatedState);
 
   }
 
-
-  getState(){
-    return this.state;
-  }
 }
 
 const counterStore = new CounterStore();

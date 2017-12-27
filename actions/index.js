@@ -1,13 +1,14 @@
-// Your implementation here.
-// Hint: We need two actions!
+import counterStore from '../stores/counterStore';
 
 
-function increment(ev){
+function increment(){
 
+  counterStore.increment();
 }
 
-function decrement(ev){
+function decrement(){
 
+     counterStore.decrement();
 }
 module.exports = {
   increment,
