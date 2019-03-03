@@ -1,4 +1,17 @@
+import counterStore from '../stores/counterStore';
+
 // Your implementation here.
 // Hint: We need two actions!
 
-export default {}
+const increment = () => {
+  counterStore.increment();
+};
+
+const decrement = () => {
+  counterStore.decrement();
+};
+
+export default {
+  increment,
+  decrement
+};
