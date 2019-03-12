@@ -1,27 +1,43 @@
 import React from 'react';
+import Actions from '../actions/index.js'
+import counterStore from '../stores/counterStore.js'
 
 class App extends React.Component {
   constructor (props) {
     super(props);
+    var counter = counterStore.getState()
     this.state = {
-      // Your implementation here.
+      counter: counter
     };
+    this.handleInc = this.handleInc.bind(this) ;
+    this.handleDec = this.handleDec.bind(this)
   }
   componentDidMount () {
-    // Your implementation here.
+    this.removeListener = counterStore.addListener((state) => {
+      this.setState({state}) ;
+    });
+    this.setState(counterStore.getState());
   }
   componentWillUnmount () {
-    // Your implementation here.
+    this.removeListener() ;
+  }
+  handleInc(event) {
+    event.preventDefault() ;
+    Actions.increment() ;
+  }
+  handleDec(event) {
+    event.preventDefault() ;
+    Actions.decrement() ;
   }
   render () {
     return (
       <div className='app'>
-        <h1 className='counter'></h1>
+        <h1 className='counter'>{this.state.counter}</h1>
         <div className='actions'>
-          <button className='decrement'>
+          <button onClick={event => this.handleDec(event)} className='decrement'>
             -
           </button>
-          <button className='increment'>
+          <button onClick={event =>  this.handleInc(event)} className='increment'>
             +
           </button>
         </div>

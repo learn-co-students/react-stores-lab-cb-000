@@ -96,4 +96,5 @@ describe('<App />', function () {
       expect(wrapper.find('.counter').text()).toBe('3');
     });
   });
+
 });
