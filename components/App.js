@@ -1,31 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class App extends React.Component {
+import actions from '../actions';
+import counterStore from '../stores/counterStore'
+
+class App extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      // Your implementation here.
-    };
+   this.state = {
+      counter: counterStore.getState()
+   }
+
+   this.handleDecrement = this.handleDecrement.bind(this);
+   this.handleIncrement = this.handleIncrement.bind(this);
   }
+  handleIncrement(ev){
+    ev.preventDefault();
+    actions.increment();
+  }
+
+  handleDecrement(ev){
+    ev.preventDefault();
+
+  actions.decrement();
+  }
+
+
   componentDidMount () {
-    // Your implementation here.
+  this.removeListener = counterStore.addListener((state) => {
+    this.setState({
+    counter: state
+  });
+
+
+  });
+
   }
   componentWillUnmount () {
-    // Your implementation here.
+  this.removeListener();
   }
-  render () {
+  render() {
+
     return (
-      <div className='app'>
-        <h1 className='counter'></h1>
-        <div className='actions'>
-          <button className='decrement'>
-            -
-          </button>
-          <button className='increment'>
-            +
-          </button>
-        </div>
-      </div>
+        <div className='app'>
+       <h1 className='counter'>{this.state.counter}</h1>
+       <div className='actions'>
+       <button className='decrement' onClick={this.handleDecrement}>
+         -
+       </button>
+       <button className='increment' onClick={this.handleIncrement}>
+         +
+       </button>
+       </div>
+     </div>
     );
   }
 }
